@@ -38,27 +38,35 @@ def main(args):
             ref = myReplace(ref)
             f.seek(1,1)
             arr1 = f.read(20).strip()
+            arr1 = myReplace(arr1)
             f.seek(1,1)
             arr2 = f.read(20).strip()
+            arr2 = myReplace(arr2)
             f.seek(1,1)
             field1 = f.read(15).strip()
-            field1 = field1.replace('\n','').replace('\r','')
+            field1 = myReplace(field1)
             f.seek(1,1)
             field2 = f.read(31).strip()
+            field2 = myReplace(field2)
             f.seek(1,1)
             field3 = f.read(4).strip()
+            field3 =myReplace(field3)
             f.seek(1,1)
             field4 = f.read(4).strip()
+            field4 = myReplace(field4)
             f.seek(1,1)
             publisher = f.read(20).strip()
+            publisher = myReplace(publisher)
             f.seek(1,1)
             field5 = myFilter(f.read(38).strip())#f.read(38).strip()
             field5 = myReplace(field5)
             f.seek(1,1)
             field6 = myFilter(f.read(72).strip())
+            field6 = myReplace(field6)
             #print(field6).strip()
             f.seek(1,1)
             field7 = f.read(3).strip()
+            field7 = myReplace(field7)
             f.seek(1,1)
             field8 = myFilter(f.read(39).strip())
             field8 = myReplace(field8)
@@ -131,8 +139,9 @@ def _Strip(inVal):
     return outVal
 
 def myFilter(inVal):
-    return filter(lambda x: x in string.printable, str(inVal))
-    
+    outVal = filter(lambda x: x in string.printable, str(inVal))
+    outVal = myReplace(outVal)
+    return outVal
 def convertPrintable(inOrd):
     if((inOrd < 32) or(inOrd > 127)):
         return 46
