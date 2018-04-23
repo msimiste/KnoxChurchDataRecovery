@@ -43,14 +43,14 @@ def main(args):
             arr2 = f.read(20).strip()
             arr2 = myReplace(arr2)
             f.seek(1,1)
-            field1 = f.read(15).strip()
-            field1 = myReplace(field1)
+            year = f.read(15).strip()
+            year = myReplace(year)
             f.seek(1,1)
-            field2 = f.read(31).strip()
-            field2 = myReplace(field2)
+            key = f.read(31).strip()
+            key = myReplace(key)
             f.seek(1,1)
-            field3 = f.read(4).strip()
-            field3 =myReplace(field3)
+            arrYear = f.read(4).strip()
+            arrYear =myReplace(arrYear)
             f.seek(1,1)
             field4 = f.read(4).strip()
             field4 = myReplace(field4)
@@ -58,28 +58,19 @@ def main(args):
             publisher = f.read(20).strip()
             publisher = myReplace(publisher)
             f.seek(1,1)
-            field5 = myFilter(f.read(38).strip())#f.read(38).strip()
-            field5 = myReplace(field5)
+            field5 = myFilter(f.read(38).strip())
             f.seek(1,1)
             field6 = myFilter(f.read(72).strip())
-            field6 = myReplace(field6)
-            #print(field6).strip()
             f.seek(1,1)
             field7 = f.read(3).strip()
-            field7 = myReplace(field7)
             f.seek(1,1)
             field8 = myFilter(f.read(39).strip())
-            field8 = myReplace(field8)
-            
             f.seek(6,1)
-            #f.seek(45,1)
             field9 = f.read(6).strip()
-            field9 = myFilter(field9)#filter(lambda x: x in string.printable, str(field9))
-            #print(field9)
+            field9 = myFilter(field9)
             f.seek(1,1)
             field10 = f.read(6).strip()
-            field10 = myFilter(field10)#filter(lambda x: x in string.printable, str(field10))
-            #print(field10)
+            field10 = myFilter(field10)
             f.seek(1,1)
             field11 = myFilter(f.read(6).strip())
             f.seek(1,1)        
@@ -111,45 +102,28 @@ def main(args):
             f.seek(8,1)
             notes = f.read(548)
             notes = notes.strip().strip('0x00')
-            notes = filter(lambda x: x in string.printable, str(notes).replace('\n','').replace('\r',''))
-            #notes = notes.replace('\n\r','').r
+            notes = myFilter(notes)
+            #notes = filter(lambda x: x in string.printable, str(notes))
+            #notes = myReplace(notes)
             count = count-1
             
-            #o.write("Song:{}; Composer:{}; Ref#:{}; Arr:{}; Arr:{}; Publisher:{}; notes:{}\n".format(title,composer,ref,arr1,arr2,publisher,notes).decode('ascii','ignore').encode('ASCII','ignore'))
-            #o.write("{};{};{};{};{};{};{}\n".format(title,composer,ref,arr1,arr2,publisher,notes).decode('ascii','ignore').encode('ASCII','ignore'))
             #non-delimited
-            o.write('Song:{};Composer:{};Ref#:{};arr1:{};arr2:{};field1:{};field2:{};field3:{};field4:{};publisher:{};field5:{};field6:{};field7:{};field8:{};field9:{};field10:{};field11:{};field12:{};field13:{};field14:{};field15:{};field16:{};field17:{};field18:{};field19:{};field20:{};field21:{};field22:{};field23:{};field24:{};notes:{}\n'.format(title,composer,ref,arr1,arr2,field1,field2,field3,field4,publisher,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,notes).decode('ascii','ignore').encode('ASCII','ignore'))
+            o.write('Song:{};Composer:{};Ref#:{};arr1:{};arr2:{};Year:{};key:{};ArrYear?:{};field4:{};publisher:{};field5:{};field6:{};field7:{};field8:{};field9:{};field10:{};field11:{};field12:{};field13:{};field14:{};field15:{};field16:{};field17:{};field18:{};field19:{};field20:{};field21:{};field22:{};field23:{};field24:{};notes:{}\n'.format(title,composer,ref,arr1,arr2,year,key,arrYear,field4,publisher,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,notes).decode('ascii','ignore').encode('ASCII','ignore'))
+            
             #delimited
-            od.write('{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{}\n'.format(title,composer,ref,arr1,arr2,field1,field2,field3,field4,publisher,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,notes).decode('ascii','ignore').encode('ASCII','ignore'))
-            #o.write('Song:{};Composer:{};Ref#:{};arr1:{};arr2:{};field1:{};field2:{};field3:{};field4:{};publisher:{};field5:{};field6:{};field7:{};field8:{};notes:{}\n'.format(title,composer,ref,arr1,arr2,field1,field2,field3,field4,publisher,field5,field6,field7,field8,notes))     
-            #o.write('field6:{};field7:{}\n'.format(field6,field7).decode('ascii','ignore').encode('ASCII','ignore'))
-            #o.flush()
-            #o.write('field9:{}; field10{};\n'.format(field9,field10).decode('ascii','ignore').encode('ASCII','ignore'))
-            #o.flush()
+            od.write('{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{};{}\n'.format(title,composer,ref,arr1,arr2,year,key,arrYear,field4,publisher,field5,field6,field7,field8,field9,field10,field11,field12,field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,notes).decode('ascii','ignore').encode('ASCII','ignore'))
+        
         o.close()
         od.close()
         f.close()
-        
-def removeNonAscii(s): return "".join(i for i in s if ord(i)<128)
-
-def _Strip(inVal):
-    #outVal = insertPrefix(inVal,prefix)
-    #print(inVal)
-    outVal = ''.join(str(chr(convertPrintable(x))) for x in inVal)
-    return outVal
 
 def myFilter(inVal):
     outVal = filter(lambda x: x in string.printable, str(inVal))
     outVal = myReplace(outVal)
     return outVal
-def convertPrintable(inOrd):
-    if((inOrd < 32) or(inOrd > 127)):
-        return 46
-    else:
-        return inOrd
         
 def myReplace(inVal):
-    return inVal.replace('\n','').replace('\r','').replace('\x0b','').replace('\x32\x32','')
+    return inVal.replace('\n','').replace('\r','').replace('\x0b','').replace('  ','')
 
 if __name__ == '__main__':
     import sys
