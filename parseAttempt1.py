@@ -24,7 +24,7 @@
 import string
 
 def main(args):
-    with open("CM_1.DAT", "rb") as f, open("parseOutDelimited_1.txt","wb") as od, open("parseOut_1.txt","wb") as o:
+    with open("CM_1.DAT", "rb") as f, open("parseOutDelimited_05_17.txt","wb") as od, open("parseOut_05_17.txt","wb") as o:
         f.seek(1048)
         count = 3000;
         while count <> 0:
