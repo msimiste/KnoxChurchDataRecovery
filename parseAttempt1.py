@@ -24,7 +24,7 @@
 import string
 
 def main(args):
-    with open("CM.DAT", "rb") as f, open("parseOutDelimited.txt","wb") as od, open("parseOut.txt","wb") as o:
+    with open("CM_1.DAT", "rb") as f, open("parseOutDelimited_1.txt","wb") as od, open("parseOut_1.txt","wb") as o:
         f.seek(1048)
         count = 3000;
         while count <> 0:
@@ -123,7 +123,9 @@ def myFilter(inVal):
     return outVal
         
 def myReplace(inVal):
-    return inVal.replace('\n','').replace('\r','').replace('\x0b','').replace('  ','')
+    outVal = inVal.strip('\xFF')
+    outVal = outVal.replace('\n','').replace('\r','').replace('\x0b','').replace('  ','')
+    return outVal
 
 if __name__ == '__main__':
     import sys
